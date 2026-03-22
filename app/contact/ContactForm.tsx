@@ -1,7 +1,5 @@
 "use client";
 
-export const dynamic = "force-dynamic";
-
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 
@@ -12,10 +10,8 @@ type FormType = {
   message: string;
 };
 
-export default function ContactPage() {
+export default function ContactForm() {
   const params = useSearchParams();
-
-  
   const selectedService = params.get("service") ?? "";
 
   const [form, setForm] = useState<FormType>({
@@ -39,7 +35,6 @@ export default function ContactPage() {
 
       if (res.ok) {
         alert("Enquiry Submitted ✅");
-
         setForm({
           name: "",
           phone: "",
@@ -57,8 +52,6 @@ export default function ContactPage() {
 
   return (
     <main style={{ paddingTop: "100px" }}>
-
-      {/* BACKGROUND VIDEO */}
       <video autoPlay loop muted playsInline className="bg-video">
         <source src="/moss2.mp4" type="video/mp4" />
       </video>
@@ -69,15 +62,13 @@ export default function ContactPage() {
         </h1>
 
         <div className="contact-container">
-
           <form className="contact-form" onSubmit={handleSubmit}>
-
             <input
               type="text"
               placeholder="Full Name"
               required
               value={form.name}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              onChange={(e) =>
                 setForm({ ...form, name: e.target.value })
               }
             />
@@ -87,14 +78,14 @@ export default function ContactPage() {
               placeholder="Phone Number"
               required
               value={form.phone}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              onChange={(e) =>
                 setForm({ ...form, phone: e.target.value })
               }
             />
 
             <select
               value={form.service}
-              onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+              onChange={(e) =>
                 setForm({ ...form, service: e.target.value })
               }
               required
@@ -110,7 +101,7 @@ export default function ContactPage() {
               placeholder="Describe your requirement"
               rows={4}
               value={form.message}
-              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+              onChange={(e) =>
                 setForm({ ...form, message: e.target.value })
               }
             />
@@ -118,12 +109,9 @@ export default function ContactPage() {
             <button className="btn btn-primary">
               Submit Enquiry
             </button>
-
           </form>
-
         </div>
       </section>
-
     </main>
   );
 }
