@@ -953,3 +953,28 @@ th {
   background: #1F5E3B;
   color: white;
 }
+.contact-container {
+  display: flex;
+  justify-content: center;
+}
+
+.contact-form {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background: rgba(255,255,255,0.8);
+}
+
+.contact-form button {
+  margin-top: 10px;
+}
