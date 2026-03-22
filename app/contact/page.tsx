@@ -1,7 +1,13 @@
+import dynamicImport from "next/dynamic";
+
 export const dynamic = "force-dynamic";
-export const revalidate = 0;
-export const fetchCache = "force-no-store";
-import ContactClient from "./ContactClient";
+
+// 🔥 disable SSR for this component
+const ContactClient = dynamicImport(() => import("./ContactClient"), {
+  ssr: false,
+});
+
+
 export default function ContactPage() {
   return <ContactClient />;
 }
