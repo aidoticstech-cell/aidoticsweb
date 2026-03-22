@@ -2,43 +2,61 @@
 
 export const dynamic = "force-dynamic";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+type FormType = {
+  name: string;
+  phone: string;
+  service: string;
+  message: string;
+};
 
 export default function ContactPage() {
-  const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    service: "",
-    message: "",
-  });
+  const [form, setForm] =  useState<FormType>({
+  name: "",
+  phone: "",
+  service: "",
+  message: "",
+});
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+// ✅ SAFE AUTO-FILL (NO WARNING)
+useEffect(() => {
+  const service = new URLSearchParams(window.location.search).get("service");
 
-    const res = await fetch("/api/enquiry", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-    });
+  if (service) {
+    setTimeout(() => {
+      setForm((prev) => ({ ...prev, service }));
+    }, 0);
+  }
+}, []);
 
-    if (res.ok) {
-      alert("Enquiry Submitted ✅");
-      setForm({
-        name: "",
-        phone: "",
-        service: "",
-        message: "",
-      });
-    } else {
-      alert("Error submitting form ❌");
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+
+        const res = await fetch("/api/enquiry", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(form),
+        });
+
+        if (res.ok) {
+            alert("Enquiry Submitted ✅");
+
+            setForm({
+                name: "",
+                phone: "",
+                service: "",
+                message: "",
+            });
+        } else {
+            alert("Error submitting form ❌");
+        }
     }
-  };
 
   return (
     <main style={{ paddingTop: "100px" }}>
-      {/* BACKGROUND VIDEO */}
       <video autoPlay loop muted playsInline className="bg-video">
         <source src="/moss2.mp4" type="video/mp4" />
       </video>
@@ -50,11 +68,8 @@ export default function ContactPage() {
 
         <div className="contact-container">
           <form className="contact-form" onSubmit={handleSubmit}>
-            
             <input
-              type="text"
               placeholder="Full Name"
-              required
               value={form.name}
               onChange={(e) =>
                 setForm({ ...form, name: e.target.value })
@@ -62,9 +77,7 @@ export default function ContactPage() {
             />
 
             <input
-              type="tel"
               placeholder="Phone Number"
-              required
               value={form.phone}
               onChange={(e) =>
                 setForm({ ...form, phone: e.target.value })
@@ -76,7 +89,6 @@ export default function ContactPage() {
               onChange={(e) =>
                 setForm({ ...form, service: e.target.value })
               }
-              required
             >
               <option value="">Select Service</option>
               <option>Attendant</option>
@@ -87,7 +99,6 @@ export default function ContactPage() {
 
             <textarea
               placeholder="Describe your requirement"
-              rows={4}
               value={form.message}
               onChange={(e) =>
                 setForm({ ...form, message: e.target.value })
@@ -97,7 +108,6 @@ export default function ContactPage() {
             <button className="btn btn-primary">
               Submit Enquiry
             </button>
-
           </form>
         </div>
       </section>
