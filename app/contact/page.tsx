@@ -1,20 +1,29 @@
 "use client";
+
 export const dynamic = "force-dynamic";
-import { useState, FormEvent } from "react";
+
+import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
 export default function ContactPage() {
   const params = useSearchParams();
-  const selectedService = params.get("service");
 
   const [form, setForm] = useState({
     name: "",
     phone: "",
-    service: selectedService || "",
+    service: "",
     message: "",
   });
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  // ✅ FIX: safely set service after mount
+  useEffect(() => {
+    const selectedService = params.get("service");
+    if (selectedService) {
+      setForm((prev) => ({ ...prev, service: selectedService }));
+    }
+  }, [params]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const res = await fetch("/api/enquiry", {
@@ -62,7 +71,9 @@ export default function ContactPage() {
               placeholder="Full Name"
               required
               value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              onChange={(e) =>
+                setForm({ ...form, name: e.target.value })
+              }
             />
 
             <input
@@ -70,18 +81,24 @@ export default function ContactPage() {
               placeholder="Phone Number"
               required
               value={form.phone}
-              onChange={(e) => setForm({ ...form, phone: e.target.value })}
+              onChange={(e) =>
+                setForm({ ...form, phone: e.target.value })
+              }
             />
 
             <select
               value={form.service}
-              onChange={(e) => setForm({ ...form, service: e.target.value })}
+              onChange={(e) =>
+                setForm({ ...form, service: e.target.value })
+              }
               required
             >
               <option value="">Select Service</option>
               <option value="Attendant">Attendant</option>
               <option value="Semi-Nurse">Semi-Nurse</option>
-              <option value="Professional Nurse">Professional Nurse</option>
+              <option value="Professional Nurse">
+                Professional Nurse
+              </option>
               <option value="Visiting Nurse">Visiting Nurse</option>
             </select>
 
@@ -89,7 +106,9 @@ export default function ContactPage() {
               placeholder="Describe your requirement"
               rows={4}
               value={form.message}
-              onChange={(e) => setForm({ ...form, message: e.target.value })}
+              onChange={(e) =>
+                setForm({ ...form, message: e.target.value })
+              }
             />
 
             <button className="btn btn-primary">
