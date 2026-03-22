@@ -29,7 +29,7 @@ export default function Services() {
               <li>Daily cleaning & comfort care</li>
             </ul>
 
-           <Link href="/contact/Attendant">
+           <Link href="/contact?service=Attendant">
   <button className="btn btn-primary">Book Now</button>
 </Link>
           </div>
@@ -46,7 +46,7 @@ export default function Services() {
               <li>Hygiene & patient support</li>
             </ul>
 
-           <Link href="/contact/Semi-Nurse">
+           <Link href="/contact?service=Semi-Nurse">
   <button className="btn btn-primary">Book Now</button>
 </Link>
           </div>
@@ -63,7 +63,7 @@ export default function Services() {
               <li>Doctor coordination</li>
             </ul>
 
-           <Link href="/contact/Professional Nurse">
+           <Link href="/contact?service=Professional Nurse">
   <button className="btn btn-primary">Book Now</button>
 </Link>
           </div>
@@ -81,7 +81,7 @@ export default function Services() {
               <li>Post-op support</li>
             </ul>
 
-           <Link href="/contact/Visiting Nurse">
+           <Link href="/contact?service=Visiting Nurse">
   <button className="btn btn-primary">Book Now</button>
 </Link>
           </div>
