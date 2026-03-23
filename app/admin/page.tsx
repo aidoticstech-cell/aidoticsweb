@@ -1,14 +1,23 @@
-import { pool } from "@/lib/db";
+"use client";
+
+import { useEffect, useState } from "react";
 import AdminTable from "./AdminTable";
 
-export default async function AdminPage() {
-  const result = await pool.query("SELECT * FROM enquiries ORDER BY created_at DESC");
+export default function AdminPage() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/get-enquiries")
+      .then((res) => res.json())
+      .then((res) => setData(res.data))
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
-    <main style={{ padding: "120px 40px 40px 40px" }}>
+    <main style={{ padding: "120px 40px" }}>
       <h1>Enquiries Dashboard</h1>
 
-      <AdminTable data={result.rows} />
+      <AdminTable data={data} />
     </main>
   );
 }
