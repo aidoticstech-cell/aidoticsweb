@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
 interface TableItem {
@@ -18,12 +18,16 @@ interface AdminTableProps {
 }
 
 export default function AdminTable({ data }: AdminTableProps) {
-const router = useRouter();
+  const router = useRouter();
 
-const [tableData, setTableData] = useState<TableItem[]>(data);
+ const [tableData, setTableData] = useState<TableItem[]>(data || []);
+  const checkedRef = useRef(false);
 
-  // ✅ AUTH CHECK (clean + no warning)
   useEffect(() => {
+    if (checkedRef.current) return;
+
+    checkedRef.current = true;
+
     const isAdmin = localStorage.getItem("admin");
 
     if (!isAdmin) {
@@ -31,8 +35,6 @@ const [tableData, setTableData] = useState<TableItem[]>(data);
     }
   }, [router]);
 
-  const isAuthorized = localStorage.getItem("admin") !== null;
-  if (!isAuthorized) return null;
   // ✅ UPDATE STATUS
   async function updateStatus(id: number, status: string) {
     try {
@@ -44,7 +46,6 @@ const [tableData, setTableData] = useState<TableItem[]>(data);
         body: JSON.stringify({ id, status }),
       });
 
-      // update UI instantly
       setTableData((prev) =>
         prev.map((item) =>
           item.id === id ? { ...item, status } : item
@@ -57,35 +58,39 @@ const [tableData, setTableData] = useState<TableItem[]>(data);
 
   return (
     <div>
-      {/* 🔥 LOGOUT BUTTON */}
-      <div
-        style={{
-          position: "sticky",
-          top: "80px",
-          zIndex: 20,
-          textAlign: "right",
-          marginBottom: "20px",
-        }}
-      >
+      {/* 🔥 LOGOUT */}
+      <div style={{ textAlign: "right", marginBottom: "20px" }}>
         <button
-          onClick={() => {
-            localStorage.removeItem("admin");
-            router.replace("/login");
-          }}
-          style={{
-            background: "#1F5E3B",
-            color: "white",
-            border: "none",
-            padding: "8px 16px",
-            borderRadius: "8px",
-            cursor: "pointer",
-          }}
-        >
-          Logout
-        </button>
+  onClick={() => {
+    localStorage.removeItem("admin");
+    router.replace("/login");
+  }}
+  style={{
+    background: "linear-gradient(135deg, #1F5E3B, #2E8B57)",
+    color: "#fff",
+    border: "none",
+    padding: "10px 18px",
+    borderRadius: "10px",
+    fontSize: "14px",
+    fontWeight: "600",
+    cursor: "pointer",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+    transition: "all 0.3s ease"
+  }}
+  onMouseOver={(e) => {
+    e.currentTarget.style.transform = "translateY(-2px)";
+    e.currentTarget.style.boxShadow = "0 6px 16px rgba(0,0,0,0.2)";
+  }}
+  onMouseOut={(e) => {
+    e.currentTarget.style.transform = "translateY(0)";
+    e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.15)";
+  }}
+>
+  Logout
+</button>
       </div>
 
-      <table style={{ width: "100%", marginTop: "20px" }}>
+      <table style={{ width: "100%" }}>
         <thead>
           <tr>
             <th>Name</th>
