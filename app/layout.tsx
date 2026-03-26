@@ -1,32 +1,38 @@
-import Script from "next/script";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./globals.css";
-import Navbar from "@/Components/Navbar";
-import Footer from "@/Components/Footer";
-import WhatsappButton from "@/Components/WhatsappButton";
+import React from 'react'
+import type { Metadata } from 'next'
+import './globals.css'
+import AnnouncementBar from '../components/global/AnnouncementBar'
+import Navbar from '../components/global/Navbar'
+import Footer from '../components/global/Footer'
+import FloatingActions from '../components/global/FloatingActions'
 
-export const metadata = {
-  title: "Aidotics",
-  description: "Premium Care Services",
-};
+export const metadata: Metadata = {
+  title: {
+    template: '%s | Aidotics — Premium Home Healthcare Gurgaon',
+    default: 'Aidotics — Premium Home Healthcare · Caregiver Services Gurgaon',
+  },
+  metadataBase: new URL('https://aidotics.com'),
+  description: 'Certified nurses, caregivers & attendants deployed to your home in 3 hours. Police-verified staff. Gurgaon, Delhi NCR. Call +91 7303815461.',
+  keywords: ['home healthcare gurgaon', 'caregiver services delhi', 'nurse at home', 'elder care gurgaon'],
+  openGraph: {
+    siteName: 'Aidotics',
+    locale: 'en_IN',
+    type: 'website',
+    images: [{ url: '/og-image.svg', width: 1200, height: 630 }],
+  },
+}
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <Script
-          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-          strategy="lazyOnload"
-        />
+        <AnnouncementBar />
         <Navbar />
-        {children}
+        <main>{children}</main>
         <Footer />
-        <WhatsappButton />
+        <FloatingActions />
       </body>
     </html>
-  );
+  )
 }
+
