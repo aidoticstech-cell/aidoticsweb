@@ -255,24 +255,32 @@ export const faqs = [
   {
     category: 'About Aidotics',
     items: [
-      { q: 'Are all staff police verified?',                     a: 'Yes. Every caregiver undergoes full police verification before being deployed to any family.' },
-      { q: 'How long has Aidotics been operating?',             a: 'Aidotics has been serving families across Gurgaon and Delhi NCR since 2021.' },
+      { q: 'What services does Aidotics Elder Care provide?', a: 'Aidotics Elder Care provides trained attendants, caregivers, semi-nurses, and professional nurses for home healthcare. Our services include elderly care, post-hospitalization care, ICU setup at home, and daily assistance for patients who need medical or personal support.' },
+      { q: 'When should I hire a caregiver or attendant?', a: 'Families usually hire caregivers when a loved one needs help with daily activities such as bathing, feeding, mobility assistance, medication reminders, or companionship. This is common for elderly patients, bedridden individuals, or people recovering from surgery.' },
+      { q: 'What is the difference between a nurse and an attendant?', a: 'A nurse is medically trained and can perform clinical tasks such as injections, wound dressing, IV medication, and patient monitoring. An attendant focuses on daily care activities such as hygiene, feeding, mobility support, and basic patient assistance.' },
+      { q: 'Can medical care be provided at home instead of in a hospital?', a: 'Yes. Many medical services can be safely provided at home, including nursing care, post-surgery monitoring, and even ICU-level support depending on the patient’s condition.' },
+      { q: 'Do you provide ICU setup at home?', a: 'Yes. Aidotics can help arrange an ICU-like setup at home for patients who require advanced monitoring after hospital discharge. This may include oxygen support, medical equipment, and trained nursing staff.' },
+      { q: 'Are all staff police verified and trained?', a: 'Yes. Every caregiver undergoes full police verification and professional screening before being deployed to ensure safety and reliability for families.' },
+      { q: 'How long has Aidotics been operating?', a: 'Aidotics has been serving families across Gurgaon and Delhi NCR since 2021.' },
       { q: 'Are you available on weekends and public holidays?', a: 'Yes. We operate 24 hours a day, 7 days a week, 365 days a year.' },
     ],
   },
   {
     category: 'Booking & Pricing',
     items: [
-      { q: 'How quickly can you deploy a caregiver?',   a: 'Our average deployment time is under 3 hours from the moment you confirm the booking.' },
-      { q: 'Is there a minimum booking duration?',      a: 'For hourly bookings, the minimum is 4 hours. Shift and live-in bookings have no minimum beyond 1 day.' },
-      { q: 'Do you offer any corporate tie-ups?',       a: 'Yes. We have corporate health packages for companies. Contact us for bulk pricing.' },
+      { q: 'How quickly can a caregiver or nurse be arranged?', a: 'In most cases, we can arrange trained staff within 24–48 hours depending on the location and complexity. However, for many standard requirements, our average deployment time is under 3 hours.' },
+      { q: 'Can services be booked for short-term care?', a: 'Yes. We provide both short-term and long-term care services depending on the patient’s needs, including recovery after surgery or temporary medical assistance.' },
+      { q: 'How do I book a caregiver or nurse from Aidotics?', a: 'You can contact us through our website, phone number, or enquiry form. Our team will understand the patient’s condition and help you choose the most suitable care service.' },
+      { q: 'Is there a minimum booking duration?', a: 'For hourly bookings, the minimum is 4 hours. Shift and live-in bookings have no minimum beyond 1 day.' },
+      { q: 'Do you offer any corporate tie-ups?', a: 'Yes. We have corporate health packages for companies. Contact us for bulk pricing.' },
     ],
   },
   {
     category: 'Caregivers',
     items: [
-      { q: 'Can I choose my caregiver?',                a: 'You can view caregiver profiles and express preferences. We make the final match based on clinical fit.' },
-      { q: 'What happens if I am unhappy?',             a: 'Contact us and we will replace the caregiver within 24 hours — no extra charge, no questions asked.' },
+      { q: 'Do you provide services for elderly patients living alone?', a: 'Yes. Many families hire our attendants to support elderly parents who live alone and need assistance with daily activities, medication reminders, and companionship.' },
+      { q: 'Can I choose my caregiver?', a: 'You can view caregiver profiles and express preferences. We make the final match based on clinical fit.' },
+      { q: 'What happens if I am unhappy?', a: 'Contact us and we will replace the caregiver within 24 hours — no extra charge, no questions asked.' },
     ],
   },
 ]

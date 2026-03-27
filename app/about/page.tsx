@@ -2,6 +2,12 @@ import SectionLabel from '@/components/ui/SectionLabel'
 import Button from '@/components/ui/Button'
 import { CheckCircle2, ShieldCheck, HeartHandshake, Handshake } from 'lucide-react'
 import Image from 'next/image'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'About Us | Our Mission & Values',
+  description: 'Learn why Aidotics is Gurgaon’s most trusted home healthcare brand. Our story of dignity, compassion, and certified clinical excellence.',
+}
 
 export default function AboutPage() {
   return (

@@ -23,8 +23,41 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Aidotics Healthcare',
+    url: 'https://aidotics.com',
+    logo: 'https://aidotics.com/logo.png',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Phase III, Cybercity',
+      addressLocality: 'Gurgaon',
+      addressRegion: 'Haryana',
+      postalCode: '122002',
+      addressCountry: 'IN',
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+91-73038-15461',
+      contactType: 'customer service',
+      areaServed: 'IN',
+      availableLanguage: ['en', 'hi'],
+    },
+    sameAs: [
+      'https://www.instagram.com/aidotics/',
+      'https://www.linkedin.com/company/aidotics/',
+    ],
+  }
+
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body>
         <AnnouncementBar />
         <Navbar />

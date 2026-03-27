@@ -5,7 +5,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { services } from '@/lib/data'
-import { Check } from 'lucide-react'
+import { Check, AlertCircle } from 'lucide-react'
+import { submitBooking } from '@/lib/actions/booking'
 
 const Step1Schema = z.object({
   serviceType: z.string().min(1, 'Please choose a service'),
@@ -43,6 +44,8 @@ const steps = [
 export default function MultiStepForm() {
   const [step, setStep] = useState(0)
   const [direction, setDirection] = useState<1 | -1>(1)
+  const [isSuccess, setIsSuccess] = useState(false)
+  const [serverError, setServerError] = useState<string | null>(null)
   const totalSteps = steps.length
 
   const serviceOptions = useMemo(() => services.map((s) => ({ value: s.name, label: s.name })), [])
@@ -55,6 +58,7 @@ export default function MultiStepForm() {
     getValues,
     setError,
     clearErrors,
+    reset,
   } = useForm<FormValues>({
     defaultValues: {
       serviceType: '',
@@ -108,25 +112,69 @@ export default function MultiStepForm() {
 
   const progressPct = ((step + 1) / totalSteps) * 100
 
+  if (isSuccess) {
+    return (
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="bg-green-wash border border-green-muted p-12 rounded-[32px] text-center"
+      >
+        <div className="w-20 h-20 bg-green-mid rounded-full flex items-center justify-center text-white mx-auto mb-6 shadow-lg">
+          <Check size={40} strokeWidth={3} />
+        </div>
+        <h2 className="font-display text-[32px] text-maroon-deep mb-4">Request Received</h2>
+        <p className="text-text-muted font-body text-balance max-w-sm mx-auto mb-8">
+          Thank you. Our care coordinator will call you within 30 minutes to confirm your clinical requirements.
+        </p>
+        <button 
+          onClick={() => { setIsSuccess(false); reset(); setStep(0); }}
+          className="text-maroon-mid font-body font-bold text-sm hover:underline"
+        >
+          Submit another request
+        </button>
+      </motion.div>
+    )
+  }
+
   return (
     <form
       onSubmit={handleSubmit(async (values) => {
-        const parsed = FullSchema.safeParse(values)
-        if (!parsed.success) {
-          clearErrors()
-          parsed.error.issues.forEach((issue) => {
-            const field = String(issue.path[0]) as keyof FormValues
-            setError(field, { type: 'manual', message: issue.message })
-          })
-          return
-        }
+        setServerError(null)
+        const formData = new FormData()
+        formData.append('service_name', values.serviceType)
+        formData.append('service_slug', values.serviceType.toLowerCase().replace(/ /g, '-'))
+        formData.append('patient_name', values.name)
+        formData.append('patient_condition', values.patientCondition)
+        formData.append('address', values.address)
+        formData.append('city', 'Gurgaon')
+        formData.append('contact_name', values.name)
+        formData.append('contact_phone', values.phone)
+        formData.append('contact_email', values.email)
+        formData.append('preferred_start_date', values.preferredStart.split('T')[0] || '')
+        formData.append('preferred_time', values.preferredStart.split('T')[1] || '')
+        
+        // Map duration
+        let durationType: 'hourly' | '12-hour' | '24x7' = 'hourly'
+        if (values.duration === '12-Hour Shift') durationType = '12-hour'
+        else if (values.duration === '24×7 Live-In') durationType = '24x7'
+        formData.append('duration_type', durationType)
 
-        // In production, send `values` to your backend / API route.
-        console.log('Contact form submitted:', values)
-        await new Promise((r) => setTimeout(r, 600))
+        const result = await submitBooking({ success: false, error: null, booking_id: null }, formData)
+        
+        if (result.success) {
+          setIsSuccess(true)
+        } else {
+          setServerError(result.error || 'Something went wrong. Please try again.')
+        }
       })}
       className="w-full"
     >
+      {serverError && (
+        <div className="mb-6 p-4 bg-maroon-pale border border-maroon-muted rounded-xl flex items-center gap-3 text-maroon-mid text-sm font-body">
+          <AlertCircle size={18} />
+          {serverError}
+        </div>
+      )}
       {/* Progress bar */}
       <div className="mb-8">
         <div className="h-2 w-full rounded-full bg-green-pale/60 overflow-hidden">

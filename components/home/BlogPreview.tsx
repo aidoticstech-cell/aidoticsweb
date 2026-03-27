@@ -11,6 +11,7 @@ import type { BlogPost } from '@/lib/supabase/types'
 type BlogPreviewPost = Pick<BlogPost, 'id' | 'slug' | 'title' | 'excerpt' | 'category' | 'cover_image'>
 
 export default function BlogPreview({ posts }: { posts: BlogPreviewPost[] }) {
+  if (posts.length === 0) return null
   return (
     <section className="bg-white py-24">
       <div className="max-w-7xl mx-auto px-4 md:px-8">

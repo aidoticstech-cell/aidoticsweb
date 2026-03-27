@@ -16,10 +16,12 @@ export default function TestimonialSlider({ testimonials }: { testimonials: Test
   const [paused, setPaused] = useState(false)
 
   useEffect(() => {
-    if (paused) return
+    if (paused || testimonials.length === 0) return
     const t = setInterval(() => setIndex(i => (i + 1) % testimonials.length), 5000)
     return () => clearInterval(t)
   }, [paused, testimonials.length])
+
+  if (testimonials.length === 0) return null
 
   const t = testimonials[index]
 

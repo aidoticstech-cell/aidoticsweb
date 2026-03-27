@@ -5,32 +5,11 @@ import { fadeUp, stagger } from '@/lib/variants'
 import SectionLabel from '@/components/ui/SectionLabel'
 import { ShieldCheck } from 'lucide-react'
 import Image from 'next/image'
+import type { Caregiver } from '@/lib/supabase/types'
 
-const caregivers = [
-  {
-    name: 'Sandhya',
-    role: 'ICU Nurse',
-    exp: '8 yrs',
-    quote: 'I treat every patient like my own family.',
-    image: '/images/team/nurse.png'
-  },
-  {
-    name: 'Neha Verma',
-    role: 'Caregiver',
-    exp: 'Dementia Care',
-    quote: 'Compassion and clinical support—always.',
-    image: '/images/team/neha_verma.png' // Placeholder for next gen
-  },
-  {
-    name: 'Arjun Mehta',
-    role: 'Physiotherapist',
-    exp: 'Mobility Rehab',
-    quote: 'Small steps today become safe walks tomorrow.',
-    image: '/images/team/arjun_mehta.png' // Placeholder for next gen
-  },
-]
-
-export default function FeaturedCaregivers() {
+export default function FeaturedCaregivers({ caregivers }: { caregivers: Caregiver[] }) {
+  if (caregivers.length === 0) return null
+  
   return (
     <section className="bg-green-pale py-24">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
@@ -48,14 +27,14 @@ export default function FeaturedCaregivers() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {caregivers.map((c, index) => (
               <motion.div
-                key={c.name}
+                key={c.id}
                 variants={fadeUp}
                 className="bg-white rounded-[18px] border border-border overflow-hidden group shadow-sm hover:shadow-md transition-shadow"
               >
                 <div className="h-80 bg-green-mid/20 relative overflow-hidden">
-                  {c.image ? (
+                  {c.photo_url ? (
                     <Image
-                      src={c.image}
+                      src={c.photo_url}
                       alt={c.name}
                       fill
                       className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
@@ -70,7 +49,7 @@ export default function FeaturedCaregivers() {
                 <div className="p-6">
                   <p className="font-body font-medium text-text-body text-[15px] mb-1">{c.name}</p>
                   <p className="text-text-muted text-[13px] mb-4">
-                    {c.role} · {c.exp}
+                    {c.role} · {c.years_experience} yrs exp
                   </p>
 
                   <div className="flex flex-wrap gap-2 mb-4">
@@ -82,7 +61,7 @@ export default function FeaturedCaregivers() {
                     </span>
                   </div>
 
-                  <p className="font-display italic text-[16px] text-maroon-deep leading-relaxed">&quot;{c.quote}&quot;</p>
+                  <p className="font-display italic text-[16px] text-maroon-deep leading-relaxed">&quot;{c.bio}&quot;</p>
                 </div>
               </motion.div>
             ))}

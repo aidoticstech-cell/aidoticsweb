@@ -2,6 +2,7 @@ import Link from 'next/link'
 import AidoticsLogo from '@/components/ui/AidoticsLogo'
 import { services } from '@/lib/data'
 import { ExternalLink } from 'lucide-react'
+import NewsletterForm from '@/components/ui/NewsletterForm'
 
 const company = [
   { name: 'About Us', href: '/about' },
@@ -23,16 +24,20 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
-          <div>
+          <div className="flex flex-col">
             <AidoticsLogo theme="light" className="mb-4" />
-            <p className="text-text-muted text-sm leading-relaxed max-w-48">
+            <p className="text-text-muted text-sm leading-relaxed max-w-48 mb-8">
               Premium home healthcare for families who value dignity, trust, and compassion.
             </p>
-            <div className="flex gap-4 mt-6">
-              <a href="#" aria-label="Instagram"><ExternalLink size={18} className="text-white/40 hover:text-white" /></a>
-              <a href="#" aria-label="Facebook"><ExternalLink size={18} className="text-white/40 hover:text-white" /></a>
-              <a href="#" aria-label="LinkedIn"><ExternalLink size={18} className="text-white/40 hover:text-white" /></a>
+
+            <div className="mt-auto">
+              <p className="text-[10px] font-body font-medium uppercase tracking-[2px] text-green-muted mb-4">Stay Informed</p>
+              <div className="max-w-xs">
+                <NewsletterForm />
+              </div>
             </div>
+
+
           </div>
 
           {/* Services */}
@@ -73,11 +78,20 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-            
-            <h4 className="text-[10px] font-body font-medium uppercase tracking-[2px] text-green-muted mb-4 pt-4 border-t border-white/5">Corporate Office</h4>
-            <address className="not-italic text-sm text-white/50 leading-relaxed space-y-3">
-              <p>DLF Forum, Cybercity, Phase III<br />Gurgaon, Haryana 122002</p>
-              <div className="pt-2">
+
+            <h4 className="text-[10px] font-body font-medium uppercase tracking-[2px] text-green-muted mb-4 pt-4 border-t border-white/5">Corporate Offices</h4>
+            <div className="space-y-6">
+              <address className="not-italic text-sm text-white/50 leading-relaxed space-y-3">
+                <p className="text-white/70 font-medium text-[10px] uppercase tracking-wider mb-1">Gurgaon Office</p>
+                <p>DLF Forum, Cybercity, Phase III<br />Gurgaon, Haryana 122002</p>
+              </address>
+
+              <address className="not-italic text-sm text-white/50 leading-relaxed space-y-3">
+                <p className="text-white/70 font-medium text-[10px] uppercase tracking-wider mb-1">Delhi Office</p>
+                <p>First floor, building no - 16 , Near SBI Bank , Sultanpur , Delhi - 110030</p>
+              </address>
+
+              <div className="pt-2 text-sm text-white/50 space-y-2">
                 <p><a href="tel:+917303815461" className="hover:text-white flex items-center gap-2">
                   <span className="w-1 h-1 rounded-full bg-green-muted" /> +91 73038 15461
                 </a></p>
@@ -85,7 +99,7 @@ export default function Footer() {
                   <span className="w-1 h-1 rounded-full bg-green-muted" /> Emotions@aidotics.com
                 </a></p>
               </div>
-            </address>
+            </div>
           </div>
         </div>
 

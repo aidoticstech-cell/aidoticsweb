@@ -3,6 +3,7 @@ import TestimonialSlider from '@/components/ui/TestimonialSlider'
 import type { Testimonial } from '@/lib/supabase/types'
 
 export default function Testimonials({ testimonials }: { testimonials: Testimonial[] }) {
+  if (testimonials.length === 0) return null
   return (
     <section className="py-24 bg-off-white">
       <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">

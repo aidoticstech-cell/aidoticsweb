@@ -29,7 +29,7 @@ export default function HowItWorks() {
           ))}
         </motion.div>
         <p className="mt-12 text-white/40 text-sm">
-          Average enquiry-to-deployment: <span className="text-maroon-soft font-medium">2.8 hours</span>
+          Average enquiry-to-deployment: <span className="text-maroon-soft font-medium">3 hours</span>
         </p>
       </div>
     </section>

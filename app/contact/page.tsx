@@ -1,7 +1,15 @@
+import ContactForm from '@/components/contact/ContactForm'
 import MultiStepForm from '@/components/ui/MultiStepForm'
 import SectionLabel from '@/components/ui/SectionLabel'
-import { Mail, MessageCircle, Phone } from 'lucide-react'
 import Button from '@/components/ui/Button'
+import { Mail, MessageCircle, Phone } from 'lucide-react'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Book Care Today | Contact Our Coordinators',
+  description: 'Ready for professional home care? Speak with our clinical coordinators now or use our 3-step booking form for immediate deployment.',
+}
+
 export default function ContactPage() {
   return (
     <div className="pb-24">
@@ -128,26 +136,10 @@ export default function ContactPage() {
             Need something specific?
           </h2>
 
-          <form className="grid grid-cols-1 md:grid-cols-3 gap-4" action="#">
-            <input
-              className="w-full rounded-md border border-border px-4 py-3 font-body text-sm"
-              placeholder="Your name"
-              aria-label="Your name"
-            />
-            <input
-              className="w-full rounded-md border border-border px-4 py-3 font-body text-sm"
-              placeholder="Phone number"
-              aria-label="Phone number"
-            />
-            <button
-              type="submit"
-              className="rounded-md bg-maroon-mid text-white px-6 py-3 font-body text-sm hover:bg-maroon-soft transition-colors"
-            >
-              Request Callback
-            </button>
-          </form>
+          <ContactForm />
         </div>
       </section>
+
 
       {/* Insurance info */}
       <section className="bg-white py-24 border-t border-border overflow-hidden">

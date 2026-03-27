@@ -1,6 +1,13 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import SectionLabel from '@/components/ui/SectionLabel'
 import Button from '@/components/ui/Button'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Expert Caregivers & Nurses in Gurgaon | Aidotics',
+  description: 'Meet our team of police-verified, certified healthcare professionals. Background-checked and skills-tested for your family’s safety.',
+}
 
 export default function CaregiversPage() {
   return (
@@ -85,24 +92,41 @@ export default function CaregiversPage() {
                 name: 'Priya Sharma',
                 role: 'ICU Nurse',
                 exp: '8 yrs',
+                image: '/images/team/nurse.png',
+                align: 'object-top',
                 quote: 'I treat every patient like my own family.',
               },
               {
-                name: 'Caregiver Profile',
-                role: 'Certified Nurse',
-                exp: 'Specialty',
+                name: 'Subhash Naggar',
+                role: 'Certified Semi-Nurse',
+                exp: '3 yrs',
+                image: '/images/team/subhash_naggar.jpg',
+                align: 'object-[center_20%]',
                 quote: 'Compassion and clinical care—always.',
               },
               {
-                name: 'Caregiver Profile',
+                name: 'Neha Devi',
                 role: 'Trained Caregiver',
-                exp: 'Experience',
+                exp: '2 yrs',
+                image: '/images/team/neha_devi.jpg',
+                align: 'object-[center_10%]',
                 quote: 'Support that makes families feel safe.',
               },
             ].map((c) => (
-              <div key={`${c.name}-${c.role}`} className="bg-white rounded-[18px] border border-border overflow-hidden">
-                <div className="h-48 bg-green-mid/20 flex items-center justify-center text-white/20 font-body">
-                  Photo placeholder
+              <div key={`${c.name}-${c.role}`} className="bg-white rounded-[18px] border border-border overflow-hidden group">
+                <div className="h-64 bg-green-mid/10 relative overflow-hidden">
+                  {c.image ? (
+                    <Image
+                      src={c.image}
+                      alt={c.name}
+                      fill
+                      className={`object-cover group-hover:scale-105 transition-transform duration-500 ${c.align || 'object-center'}`}
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-green-mid/30 text-sm font-body">
+                      Photo Coming Soon
+                    </div>
+                  )}
                 </div>
                 <div className="p-6">
                   <p className="font-body font-medium text-text-body text-[15px] mb-1">{c.name}</p>
