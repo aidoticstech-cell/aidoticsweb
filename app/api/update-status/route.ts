@@ -16,9 +16,13 @@ export async function POST(req: Request) {
       );
     }
 
+    let dbStatus = "new";
+    if (status === "Contacted") dbStatus = "read";
+    if (status === "Closed") dbStatus = "replied";
+
     await pool.query(
-      "UPDATE enquiries SET status = $1 WHERE id = $2",
-      [status, id]
+      "UPDATE contacts SET status = $1 WHERE id = $2",
+      [dbStatus, id]
     );
 
     return NextResponse.json({ success: true });

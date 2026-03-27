@@ -8,9 +8,11 @@ export async function POST(req: Request) {
     console.log("Incoming data:", body);
     const { name, phone, service, message } = body;
 
+    const combinedMessage = service ? `[Service: ${service}] ${message}` : message;
+
     await pool.query(
-      "INSERT INTO enquiries (name, phone, service, message) VALUES ($1, $2, $3, $4)",
-      [name, phone, service, message]
+      "INSERT INTO contacts (name, phone, message) VALUES ($1, $2, $3)",
+      [name, phone, combinedMessage]
     );
 
     return new Response(JSON.stringify({ success: true }), {
