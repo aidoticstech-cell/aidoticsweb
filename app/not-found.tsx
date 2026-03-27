@@ -11,11 +11,11 @@ export default function NotFound() {
         
         <SectionLabel>404 Error</SectionLabel>
         <h1 className="font-display font-light text-[42px] text-maroon-deep leading-tight mt-4 mb-6">
-          The care path you followed isn't here.
+          The care path you followed isn&apos;t here.
         </h1>
         
         <p className="font-body text-text-muted text-[15px] leading-relaxed mb-10">
-          The page might have moved or is temporarily unavailable. Let's get you back to finding the right support for your family.
+          The page might have moved or is temporarily unavailable. Let&apos;s get you back to finding the right support for your family.
         </p>
 
         <div className="flex flex-col gap-3">
