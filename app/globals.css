@@ -53,12 +53,13 @@ body {
   0% {
     transform: translateY(-30px);
     opacity: 0;
-    box-shadow: 0 0 0 rgba(0,0,0,0);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
   }
+
   100% {
     transform: translateY(0);
     opacity: 1;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   }
 }
 
@@ -69,11 +70,12 @@ body {
 
 /* Scroll-Aware Sticky / Glassmorphism State */
 .ag-navbar-scrolled {
-  background-color: rgba(13, 43, 30, 0.85) !important; /* Brand deep green tinted */
+  background-color: rgba(13, 43, 30, 0.85) !important;
+  /* Brand deep green tinted */
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  padding-top: 0.5rem !important; 
+  padding-top: 0.5rem !important;
   padding-bottom: 0.5rem !important;
   transition: all 350ms ease-out;
   will-change: backdrop-filter, background-color, box-shadow, padding;
@@ -153,18 +155,21 @@ body {
 .ag-menu-toggle {
   transition: transform 300ms ease;
 }
+
 .ag-menu-toggle.ag-open {
   transform: rotate(90deg) scale(0.9);
 }
 
 /* Prefers Reduced Motion Fallback */
 @media (prefers-reduced-motion: reduce) {
+
   .ag-navbar-entrance,
   .ag-mobile-item {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
   }
+
   .ag-nav-link,
   .ag-logo,
   .ag-menu-toggle {
