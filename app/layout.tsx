@@ -5,6 +5,7 @@ import AnnouncementBar from '../components/global/AnnouncementBar'
 import Navbar from '../components/global/Navbar'
 import Footer from '../components/global/Footer'
 import FloatingActions from '../components/global/FloatingActions'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export const metadata: Metadata = {
   title: {
@@ -64,6 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main>{children}</main>
         <Footer />
         <FloatingActions />
+        <SpeedInsights />
       </body>
     </html>
   )
